@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="AJAX Using JSON" />
         <module name="AJAX" />
         <module name="AJAX JQuery" />
       </profile>
@@ -14,6 +15,7 @@
       <module name="AJAX" target="1.5" />
       <module name="AJAX JQuary" target="1.5" />
       <module name="AJAX JQuery" target="1.5" />
+      <module name="AJAX Using JSON" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
