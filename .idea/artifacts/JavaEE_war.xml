@@ -8,12 +8,7 @@
       </options>
     </properties>
     <root id="archive" name="JavaEE-1.0.0.war">
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes">
-          <element id="module-output" name="JavaEE" />
-        </element>
-      </element>
-      <element id="javaee-facet-resources" facet="JavaEE/web/Web" />
+      <element id="artifact" artifact-name="JavaEE:war exploded" />
     </root>
   </artifact>
 </component>

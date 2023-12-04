@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajex</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<main id="cus-menu">
+    <div class="container text-center">
+        <div class="row">
+            <form id="CusForm" class="col-6" style="margin-top: 25px;width: 470px;">
+                <div class="container text-center" style="background-color:#F8F9F9;padding-bottom: 30px;padding-top: 10px; margin-top: 10px;box-shadow: 1px 2px 5px 4px #EAECEE;">
+                    <h5 class="text-center p-2 text-light" style="background-color:#3498DB;">Customer Form
+
+                        <button type="button" class="btn btn-primary"
+                                style="width: 55px; margin-left: 160px;border-radius: 50%;height: 55px;font-weight: bold;" id="cusAdd">Add</button></h5>
+
+                    <div class="row" style="margin: 10px;">
+                        <div class="col-4">
+                            <label class="form-label" >CusID</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" name="cusID" type="text">
+                            <p><small class="text-danger" id="cusIDError"></small></p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin: 10px;">
+                        <div class="col-4">
+                            <label class="form-label"  >Name</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" name="cusName" type="text">
+                            <p><small class="text-danger" id="cusNameError"></small></p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin: 10px;">
+                        <div class="col-4">
+                            <label class="form-label" >Address</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" name="cusAddress" type="text">
+                            <p><small class="text-danger" id="cusAddressError"></small></p>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin: 10px;">
+                        <div class="col-4">
+                            <label class="form-label" >Salary</label>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" name="cusSalary" type="number">
+                            <p><small class="text-danger" id="cusSalaryError"></small></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" style="font-weight: bold;" id="cusSave">Save</button>
+                            <button type="button" class="btn btn-success" style="font-weight: bold;" id="cusUpdate">Update</button>
+                            <button type="button" class="btn btn-secondary"
+                                    style="font-weight: bold;" id="cusGetAll">GetAll</button>
+                            <button type="button" class="btn btn-danger"
+                                    style="width: 66px;" id="cusDelete">Delete</button>
+                            <button type="button" class="btn btn-warning" id="cusClear">Clear</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+            <div class="col-7" style="margin-top: 35px;padding-left: 60px;">
+                <table class="table table-hover" >
+                    <thead>
+                    <tr id="cusThead" class="table-primary">
+                        <th scope="col">CusID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Salary</th>
+                    </tr>
+                    </thead>
+                    <tbody id="customerTable">
+                    <tr>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<script>
+    $("#cusSave").click(function () {
+        var data = $("#CusForm").serialize();
+        $.ajax({
+            url:"customer",
+            method: "POST",
+           // async: false, this false can use to default synchronous
+            data:data,
+            success:function (res) {
+            }
+        })
+    })
+</script>
+</body>
+</html>
