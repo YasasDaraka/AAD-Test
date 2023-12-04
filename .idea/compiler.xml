@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="AJAX" />
+        <module name="AJAX JQuery" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AJAX" target="1.5" />
+      <module name="AJAX JQuary" target="1.5" />
+      <module name="AJAX JQuery" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

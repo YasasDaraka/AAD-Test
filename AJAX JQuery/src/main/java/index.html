@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajex</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="form-group text-right">
+    <h1>Ajax</h1>
+    <button class="btn btn-danger col-12 col-sm-auto" id="btnAddToTable" type="button">
+        Send
+    </button>
+    <div class="col-12 col-lg-8 mt-3">
+        <table class="table table-bordered table-hover">
+            <thead class="bg-danger text-white">
+            <tr>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Customer Address</th>
+                <th>Customer Salary</th>
+            </tr>
+            </thead>
+            <tbody id="tblCustomer">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<script>
+    $("button").click(function () {
+        $("tblCustomer").empty();
+        $.ajax({
+            url:"assets/db/db.xml",
+           // async: false, this false can use to default synchronous
+            success:function (res) {
+                //$(res) use to convert to object //return document type
+                var resp = $(res).children().children();
+                for (var i = 0; i < resp.length; i++) {
+                   var id = $(res).children().children().eq(i).find("id").text();
+                    var name = $(res).children().children().eq(i).find("name").text();
+                    var address = $(res).children().children().eq(i).find("address").text();
+                    var salary = $(res).children().children().eq(i).find("salary").text();
+                    console.log(id,name,address,salary);
+                    let row = `<tr>
+                     <td>${id}</td>
+                     <td>${name}</td>
+                     <td>${address}</td>
+                     <td>${salary}</td>
+                    </tr>`;
+                    $("#tblCustomer").append(row);
+                }
+
+            }
+        })
+    })
+</script>
+</body>
+</html>
