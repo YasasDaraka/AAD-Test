@@ -99,6 +99,39 @@ public class HelloServlet extends HttpServlet {
             resp.getWriter().write("false");
             e.printStackTrace();
         }
+    }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id=  req.getParameter("cusID");
+        String name=  req.getParameter("cusName");
+        String address=  req.getParameter("cusAddress");
+        String salary=  req.getParameter("cusSalary");
+
+        try {
+            Connection con = DBConnection.getInstance().getConnection();
+            String sql = "UPDATE customer SET cusName = ?, cusAddress = ?, cusSalary = ? WHERE cusId = ?";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, name);
+            pstm.setString(2, address);
+            pstm.setDouble(3, Double.parseDouble(salary));
+            pstm.setString(4, id);
+
+            boolean isSaved = pstm.executeUpdate() > 0;
+
+            if (isSaved){
+                System.out.println("Customer Updated");
+                resp.getWriter().write("true");
+            }else{
+                System.out.println("Customer not Updated");
+                resp.getWriter().write("false");
+            }
+        } catch (SQLException throwables) {
+            resp.getWriter().write("false");
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            resp.getWriter().write("false");
+            e.printStackTrace();
+        }
     }
 }

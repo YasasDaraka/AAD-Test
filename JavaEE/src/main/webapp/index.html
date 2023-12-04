@@ -155,7 +155,24 @@
            }
        })
     })
-
+    $("#cusUpdate").click(function () {
+        var data = $("#CusForm").serialize();
+        $.ajax({
+            url: "customer?"+data,
+            method: "PUT",
+            //dataType:"json", to inform to js respons type is json file
+            // async: false, this false can use to default synchronous
+            success:function (res) {
+                console.log(res)
+                if (res == "true") {
+                    alert("Customer Update Successfully")
+                    loadAllCus();
+                }if (res == "false") {
+                    alert("Customer Not Update")
+                }
+            }
+        })
+    })
 </script>
 </body>
 </html>
