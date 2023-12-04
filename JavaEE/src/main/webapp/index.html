@@ -21,7 +21,7 @@
                             <label class="form-label" >CusID</label>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="cusID" type="text">
+                            <input class="form-control" id = "customerID" name="cusID" type="text">
                             <p><small class="text-danger" id="cusIDError"></small></p>
                         </div>
                     </div>
@@ -135,6 +135,25 @@
     });
     $("#cusGetAll").click(function () {
         loadAllCus();
+    })
+    $("#cusDelete").click(function () {
+       var cusId = $("#customerID").val();
+       console.log("customer?cusId="+cusId)
+       $.ajax({
+           url: "customer?cusId="+cusId,
+           method: "DELETE",
+        //dataType:"json", to inform to js respons type is json file
+        // async: false, this false can use to default synchronous
+           success:function (res) {
+               console.log(res)
+               if (res == "true") {
+                   alert("Customer Delete Successfully")
+                   loadAllCus();
+               }if (res == "false") {
+                   alert("Customer Not Delete")
+               }
+           }
+       })
     })
 
 </script>
