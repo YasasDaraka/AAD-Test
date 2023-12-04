@@ -31,7 +31,7 @@
                             <label class="form-label"  >Name</label>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="cusName" type="text">
+                            <input class="form-control" id="customerName" name="cusName" type="text">
                             <p><small class="text-danger" id="cusNameError"></small></p>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <label class="form-label" >Address</label>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="cusAddress" type="text">
+                            <input class="form-control" id="customerAddress" name="cusAddress" type="text">
                             <p><small class="text-danger" id="cusAddressError"></small></p>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <label class="form-label" >Salary</label>
                         </div>
                         <div class="col">
-                            <input class="form-control" name="cusSalary" type="number">
+                            <input class="form-control" id="customerSalary" name="cusSalary" type="number">
                             <p><small class="text-danger" id="cusSalaryError"></small></p>
                         </div>
                     </div>
@@ -110,6 +110,7 @@
                      <td>${r.salary}</td>
                     </tr>`;
                     $("#customerTable").append(row);
+                    bindTrrEvents();
                 }
             }
         });
@@ -173,6 +174,21 @@
             }
         })
     })
+    function bindTrrEvents() {
+        $('#customerTable>tr').click(function () {
+
+            let id = $(this).children().eq(0).text();
+            let name = $(this).children().eq(1).text();
+            let address = $(this).children().eq(2).text();
+            let salary = $(this).children().eq(3).text();
+
+            console.log(id,name,address,salary)
+            $("#customerID").val(id);
+            $("#customerName").val(name);
+            $("#customerAddress").val(address);
+            $("#customerSalary").val(salary);
+        });
+    }
 </script>
 </body>
 </html>
