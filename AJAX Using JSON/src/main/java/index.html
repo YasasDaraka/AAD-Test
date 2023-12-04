@@ -35,24 +35,6 @@
             url:"assets/db/db.json",
            // async: false, this false can use to default synchronous
             success:function (res) {
-                var resp = $(res);
-
-                for (var element of resp) {
-                    var id = element.id;
-                    var name = element.name;
-                    var address = element.address;
-                    var salary = element.salary;
-
-                    console.log(id, name, address, salary);
-
-                    let row = `<tr>
-                     <td>${id}</td>
-                     <td>${name}</td>
-                     <td>${address}</td>
-                     <td>${salary}</td>
-                    </tr>`;
-                    $("#tblCustomer").append(row);
-                }
 
             }
         })
