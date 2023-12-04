@@ -36,13 +36,24 @@
            // async: false, this false can use to default synchronous
             success:function (res) {
                 //$(res) use to convert to object //return document type
-                var resp = $(res).children().children();
+                /*var resp = $(res).children().children();
                 for (var i = 0; i < resp.length; i++) {
                    var id = $(res).children().children().eq(i).find("id").text();
                     var name = $(res).children().children().eq(i).find("name").text();
                     var address = $(res).children().children().eq(i).find("address").text();
                     var salary = $(res).children().children().eq(i).find("salary").text();
-                    console.log(id,name,address,salary);
+                    console.log(id,name,address,salary);*/
+
+                var resp = $(res).children().children();
+
+                for (var element of resp) {
+                    var id = $(element).find("id").text();
+                    var name = $(element).find("name").text();
+                    var address = $(element).find("address").text();
+                    var salary = $(element).find("salary").text();
+
+                    console.log(id, name, address, salary);
+                
                     let row = `<tr>
                      <td>${id}</td>
                      <td>${name}</td>
