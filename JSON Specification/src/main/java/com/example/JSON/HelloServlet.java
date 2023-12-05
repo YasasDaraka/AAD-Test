@@ -39,7 +39,7 @@ public class HelloServlet extends HttpServlet {
             JsonObjectBuilder finalOB = Json.createObjectBuilder();
             finalOB.add("data",arrayBuilder.build());
             finalOB.add("message","Done");
-            finalOB.add("status","200");
+            finalOB.add("status",200);
 
             resp.getWriter().write(String.valueOf(finalOB.build()));
         } catch (SQLException throwables) {
@@ -57,7 +57,6 @@ public class HelloServlet extends HttpServlet {
         String salary=  req.getParameter("cusSalary");
         resp.setContentType("application/json");//always set content Type
         JsonObjectBuilder finalOB = Json.createObjectBuilder();
-        finalOB.add("data","");
         try {
             Connection con = DBConnection.getInstance().getConnection();
             String sql = "INSERT INTO customer(cusId, cusName, cusAddress, cusSalary) " +
@@ -70,22 +69,82 @@ public class HelloServlet extends HttpServlet {
 
             if (pstm.executeUpdate() > 0){
                 System.out.println("Customer added");
+                resp.setStatus(HttpServletResponse.SC_CREATED);//status code 201
                 finalOB.add("status",200);
                 finalOB.add("message","true");
+                finalOB.add("data","");
                 resp.getWriter().write(String.valueOf(finalOB.build()));
             }
         } catch (SQLException throwables) {
-            finalOB.add("status",500);
+           // resp.setStatus(HttpServletResponse.SC_BAD_REQUEST); Use status code 400 to Http header Status code change mannually and browser show error in ajex
+            resp.setStatus(HttpServletResponse.SC_OK);//to send error to sucsess method in AJAx
+            finalOB.add("status",400);//use define to manual details send with response
+            // like resp.setStatus// resp.sendError(404); send http error page
             finalOB.add("message","false");
+            finalOB.add("data",throwables.getLocalizedMessage());
             resp.getWriter().write(String.valueOf(finalOB.build()));
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
+           // resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); Use status code 500 to Http header Status code change mannually and browser show error in ajex
+            resp.setStatus(HttpServletResponse.SC_OK);//to send error to sucsess method in AJAx
+            // like resp.setStatus// resp.sendError(404); send http error page
             finalOB.add("status",500);
             finalOB.add("message","false");
+            finalOB.add("data",e.getLocalizedMessage());
             resp.getWriter().write(String.valueOf(finalOB.build()));
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Connection con = null;
+        String cusID = req.getParameter("cusId");
+        resp.setContentType("application/json");//always set content Type
+        JsonObjectBuilder finalOB = Json.createObjectBuilder();
+        try {
+            con = DBConnection.getInstance().getConnection();
+            String sql = "DELETE FROM customer WHERE cusId = ?";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, cusID);
+
+            if (pstm.executeUpdate() > 0){
+                System.out.println("Customer Deleted");
+                resp.setStatus(HttpServletResponse.SC_CREATED);//status code 201
+                finalOB.add("status",200);
+                finalOB.add("message","true");
+                finalOB.add("data","");
+                resp.getWriter().write(String.valueOf(finalOB.build()));
+            }else {
+                //when no show sql error id not exist then we handle it, check before delete or like this
+                finalOB.add("status",400);//use define to manual details send with response
+                finalOB.add("message","false");
+                finalOB.add("data","Wrong ID Inserted");
+                resp.getWriter().write(String.valueOf(finalOB.build()));
+            }
+        } catch (SQLException throwables) {
+            System.out.println("Sql error");
+            throwables.printStackTrace();
+            // resp.setStatus(HttpServletResponse.SC_BAD_REQUEST); Use status code 400 to Http header Status code change mannually and browser show error in ajex
+            resp.setStatus(HttpServletResponse.SC_OK);//to send error to sucsess method in AJAx
+            // like resp.setStatus// resp.sendError(404); send http error page
+            finalOB.add("status",500);//use define to manual details send with response
+            finalOB.add("message","false");
+            finalOB.add("data",throwables.getLocalizedMessage());
+            resp.getWriter().write(String.valueOf(finalOB.build()));
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class error");
+            e.printStackTrace();
+            // resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); Use status code 500 to Http header Status code change mannually and browser show error in ajex
+            resp.setStatus(HttpServletResponse.SC_OK);//to send error to sucsess method in AJAx
+            finalOB.add("status",500);
+            finalOB.add("message","false");
+            finalOB.add("data",e.getLocalizedMessage());
+            resp.getWriter().write(String.valueOf(finalOB.build()));
+
+        }
+    }
+
 
     @Override
     public void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {

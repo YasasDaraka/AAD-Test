@@ -127,15 +127,20 @@
             data:data,
             success:function (res) {
                 console.log(res);
-                let message = res.message;
-                console.log("Received message:", message);
-                if (message == "true") {
+                console.log("Received message:", res.message);
+                if (res.status == 200) {
                     alert("Customer Added Successfully");
                     loadAllCus();
                 } else {
-                    console.warn("Unexpected message value:", message);
-                    alert("Customer Not Added");
+                    console.warn(res.data);
+                    alert(res.data+" : Customer Not Added");
                 }
+            },
+            //can inform to browser when customized errors or defalt errors
+            //if response is an error when execute this
+            //status codes 300,400,500 only show this up to 300-500
+            error:function (ob, textStatus, error) {
+                alert(textStatus+" : Error Customer Not Added")
             }
         });
     });
@@ -151,16 +156,28 @@
         //dataType:"json", to inform to js respons type is json file
         // async: false, this false can use to default synchronous
            success:function (res) {
-               console.log(res)
-               if (res == "true") {
-                   alert("Customer Delete Successfully")
+               console.log(res);
+               console.log("Received message:", res.message);
+               if (res.status == 200) {
+                   alert("Customer Delete Successfully");
                    loadAllCus();
-               }if (res == "false") {
-                   alert("Customer Not Delete")
+               } else if (res.status == 400) {
+                   console.warn(res.data);
+                   alert(res.data+" : Customer Not Delete");
+               }else {
+                   //when error from 500 cat.. or other errors
+                   console.warn(res.data);
+                   alert(res.data+" : Customer Not Delete");
                }
+           },
+           //can inform to browser when customized errors or defalt errors
+           //if response is an error when execute this
+           //status codes 300,400,500 only show this up to 300-500
+           error:function (ob, textStatus, error) {
+               alert(textStatus+" : Error Customer Not Delete")
            }
-       })
-    })
+       });
+    });
     $("#cusUpdate").click(function () {
         var data = $("#CusForm").serialize();
         $.ajax({
@@ -169,6 +186,7 @@
             //dataType:"json", to inform to js respons type is json file
             // async: false, this false can use to default synchronous
             success:function (res) {
+                //only show this status code 100 to 200
                 console.log(res)
                 if (res == "true") {
                     alert("Customer Update Successfully")
@@ -176,9 +194,15 @@
                 }if (res == "false") {
                     alert("Customer Not Update")
                 }
+            },
+            //can inform to browser when customized errors or defalt errors
+            //if response is an error when execute this
+            //status codes 300,400,500 only show this up to 300-500
+            error:function (ob, textStatus, error) {
+                alert(textStatus+" : Error Customer Not Update");
             }
-        })
-    })
+        });
+    });
     function bindTrrEvents() {
         $('#customerTable>tr').click(function () {
 
