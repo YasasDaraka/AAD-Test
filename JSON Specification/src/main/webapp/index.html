@@ -132,10 +132,9 @@
                 if (message == "true") {
                     alert("Customer Added Successfully");
                     loadAllCus();
-                } else if (message == "false") {
-                    alert("Customer Not Added");
                 } else {
                     console.warn("Unexpected message value:", message);
+                    alert("Customer Not Added");
                 }
             }
         });

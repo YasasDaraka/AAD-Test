@@ -68,26 +68,19 @@ public class HelloServlet extends HttpServlet {
             pstm.setString(3, address);
             pstm.setDouble(4, Double.parseDouble(salary));
 
-            boolean isSaved = pstm.executeUpdate() > 0;
-
-            if (isSaved){
+            if (pstm.executeUpdate() > 0){
                 System.out.println("Customer added");
-                finalOB.add("status","200");
+                finalOB.add("status",200);
                 finalOB.add("message","true");
-                resp.getWriter().write(String.valueOf(finalOB.build()));
-            }else{
-                System.out.println("Customer not added");
-                finalOB.add("status","400");
-                finalOB.add("message","false");
                 resp.getWriter().write(String.valueOf(finalOB.build()));
             }
         } catch (SQLException throwables) {
-            finalOB.add("status","400");
+            finalOB.add("status",500);
             finalOB.add("message","false");
             resp.getWriter().write(String.valueOf(finalOB.build()));
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
-            finalOB.add("status","400");
+            finalOB.add("status",500);
             finalOB.add("message","false");
             resp.getWriter().write(String.valueOf(finalOB.build()));
             e.printStackTrace();
