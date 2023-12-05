@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="JSON" />
         <module name="AJAX JQuery" />
         <module name="AJAX Using JSON" />
         <module name="AJAX" />
@@ -18,6 +19,7 @@
       <module name="AJAX JQuery" target="1.5" />
       <module name="AJAX Using JSON" target="1.5" />
       <module name="JavaEE" target="11" />
+      <module name="JSON" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

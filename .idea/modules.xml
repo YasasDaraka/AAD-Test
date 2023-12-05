@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AJAX/AJAX.iml" filepath="$PROJECT_DIR$/AJAX/AJAX.iml" />
       <module fileurl="file://$PROJECT_DIR$/AJAX JQuery/AJAX JQuery.iml" filepath="$PROJECT_DIR$/AJAX JQuery/AJAX JQuery.iml" />
       <module fileurl="file://$PROJECT_DIR$/AJAX Using JSON/AJAX Using JSON.iml" filepath="$PROJECT_DIR$/AJAX Using JSON/AJAX Using JSON.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JSON Specification/JSON.iml" filepath="$PROJECT_DIR$/JSON Specification/JSON.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaEE/JavaEE.iml" filepath="$PROJECT_DIR$/JavaEE/JavaEE.iml" />
     </modules>
   </component>
